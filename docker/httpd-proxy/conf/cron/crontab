@@ -1,3 +1,0 @@
-# Stats generator (every 5 mins)
-*/5 * * * * /opt/bin/stats.sh
-# keep this EOL

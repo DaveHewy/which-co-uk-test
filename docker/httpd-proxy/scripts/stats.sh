@@ -13,12 +13,13 @@
 # Last step make the new file live with a switcheroooney
 now="$(date)"
 process_count="$(ps -e | wc -l)"
+process_count_cpu_util="$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}')"
 memory_general="$(cat /proc/meminfo)"
 memory_free="$(cat /proc/meminfo |grep -i memfree)"
 disk_usage="$(df -h)"
 
 # Write to file.
-echo "<html><head><link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\"></head><body><h1>Status page</h1><p>Generated on: ${now}</p><p>Process count: ${process_count}</p><p>Memory: ${memory_general}</p><p>Memory free: ${memory_free}</p><p>disk_usage: ${disk_usage}</p></body></html>" > /tmp/status.html
+echo "<html><head><link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\"></head><body><h1>Status page</h1><p>Generated on: ${now}</p><p>Process count: ${process_count}</p><p>CPU Utilisation: ${process_count_cpu_util}<p>Memory: ${memory_general}</p><p>Memory free: ${memory_free}</p><p>disk_usage: ${disk_usage}</p></body></html>" > /tmp/status.html
 
 # Swap the files around.
-mv --force /tmp/status.html /usr/local/apache2/htdocs/index.html
+mv --force /tmp/status.html /www/default/index.html

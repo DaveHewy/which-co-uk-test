@@ -1,0 +1,9 @@
+[template]
+src   = "crontab.conf"
+dest  = "/etc/cron.d/status-cron"
+owner = "root"
+group = "root"
+mode  = "0644"
+keys = [
+  "/status/refresh"
+]

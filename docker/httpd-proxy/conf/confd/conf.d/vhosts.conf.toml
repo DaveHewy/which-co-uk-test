@@ -1,0 +1,10 @@
+[template]
+src   = "vhosts.conf"
+dest  = "/usr/local/apache2/conf/extra/httpd-vhosts.conf"
+owner = "root"
+group = "root"
+mode  = "0644"
+keys = [
+  "/unset/http",
+  "/set/http"
+]
